@@ -4,14 +4,14 @@ import os
 app = Flask(__name__)
 
 
-call_participants = []  # Lista para almacenar los participantes de la llamada (pares de nombre y emote)
-DEFAULT_CALL = {"name": "Solita", "emote": "nolleyClap"}  # Valor predeterminado para la llamada
+call_participants = [] 
+DEFAULT_CALL = {"name": "Solita", "emote": "nolleyClap"}  
 
 
 
 @app.route("/addcall", methods=['GET'])
 def add_call():
-    entries = request.args.get("entries", "").split()  # Separar por espacios
+    entries = request.args.get("entries", "").split()  
     if len(entries) % 2 != 0:
         return "Numero incorrecto de elementos, recuerda enviar siempre un Nombre sin espacios y un Emote por participante nephuDerp"
 
@@ -25,20 +25,17 @@ def add_call():
 
 @app.route("/removecall", methods=['GET'])
 def remove_call():
-    names = request.args.get("entries", "").split()  # Separar por espacios (solo nombres)
+    names = request.args.get("entries", "").split() 
     removed = []
-    
-    # Convertir los nombres a minúsculas para comparar sin importar mayúsculas/minúsculas
+   
     names = [name.lower() for name in names]
     
     for name in names:
-        # Buscar y remover los participantes que coincidan solo con el nombre (ignorando mayúsculas/minúsculas)
         for participant in call_participants[:]:
             if participant['name'].lower() == name:
                 call_participants.remove(participant)
                 removed.append(f"{name} {participant['emote']}")
     
-    # Si no quedan participantes, agregar el valor predeterminado
     if not call_participants:
         return f"{DEFAULT_CALL['name']} {DEFAULT_CALL['emote']} " 
     
@@ -51,13 +48,12 @@ def remove_call():
 
 
 
-# Ruta para resetear la llamada
+
 @app.route("/resetcall", methods=['GET'])
 def reset_call():
     call_participants.clear()
     return f"!call reiniciado nolleyClap"
 
-# Ruta para obtener la información de la llamada
 @app.route("/call", methods=['GET'])
 def get_call():
     if not call_participants:
@@ -68,6 +64,5 @@ def get_call():
 
 
 
-# Inicia Flask
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
