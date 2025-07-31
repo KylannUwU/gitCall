@@ -120,7 +120,7 @@ def set_plan():
         if plan.lower() == plan_to_set:
             current_plan_index = i
             save_data()
-            return f"'{plans[i]}' En pantalla nephuo7"
+            return f"'{plans[i]}' En pantalla nolleySip"
     return "Plan no encontrado nolleyRage"
 
 @app.route("/nextplan")
@@ -133,7 +133,7 @@ def next_plan():
     else:
         current_plan_index += 1
         save_data()
-        return f"Siguiente plan: {plans[current_plan_index]} [En pantalla] nephuo7"
+        return f"Siguiente plan: {plans[current_plan_index]} [En pantalla] nolleySip"
 
 @app.route("/resetplan")
 def reset_plan():
@@ -157,7 +157,7 @@ def get_plan():
             parts.append(plan)
 
     dynamic_part = " ➜ ".join(parts) + " ➜ " if parts else ""
-    return f" @{user} Plan de hoy NolleySip ➜ {dynamic_part} Lo que caiga! nolleyVueltitas"
+    return f" @{user} Plan de hoy nolleySip ➜ {dynamic_part} Lo que caiga! nolleyVueltitas"
 
 
 
